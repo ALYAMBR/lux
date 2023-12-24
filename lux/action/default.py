@@ -1,6 +1,7 @@
 def register_default_actions():
     import lux
     from lux.action.custom import custom
+    from lux.action.combine import combine
     from lux.action.correlation import correlation
     from lux.action.univariate import univariate
     from lux.action.enhance import enhance
@@ -25,5 +26,6 @@ def register_default_actions():
     lux.config.register_action("Enhance", enhance, one_current_vis)
     lux.config.register_action("Filter", add_filter, one_current_vis)
     lux.config.register_action("Generalize", generalize, one_current_vis)
+    lux.config.register_action("Combine", combine, one_current_vis)
 
     lux.config.register_action("Custom", custom, multiple_current_vis)

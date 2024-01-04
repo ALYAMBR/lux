@@ -23,9 +23,9 @@ def register_default_actions():
     lux.config.register_action("temporal", temporal, no_vis)
     lux.config.register_action("geographical", univariate, no_vis, "geographical")
 
+    lux.config.register_action("Combine", combine, one_current_vis)
     lux.config.register_action("Enhance", enhance, one_current_vis)
     lux.config.register_action("Filter", add_filter, one_current_vis)
     lux.config.register_action("Generalize", generalize, one_current_vis)
-    lux.config.register_action("Combine", combine, one_current_vis)
 
     lux.config.register_action("Custom", custom, multiple_current_vis)

@@ -49,7 +49,7 @@ def combine(ldf):
 
 
     # vlist = lux.vis.VisList.VisList(combinations, source=ldf)
-    vlist=[]
+    vlist=ldf.current_vis
 
 
 

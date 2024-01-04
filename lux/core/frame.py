@@ -599,7 +599,7 @@ class LuxDataFrameMixin:
                         if self._toggle_pandas_display:
                             display(self.display_pandas())
                         else:
-                            b.layout.display = "none"
+                            # b.layout.display = "none"
                             display(self._widget)
                             # b.layout.display = "inline-block"
 

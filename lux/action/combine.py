@@ -35,10 +35,6 @@ def combine(ldf):
     # combination of two features
     # --> return list of dataObjects with corresponding interestingness scores
 
-
-
-
-
     recommendation = { 
         "action": "Combine",
         "description": f"Combine an attribute with other features.",
@@ -46,13 +42,15 @@ def combine(ldf):
 
     }
 
-
+    posbl_attrs = [c for c in ldf.columns if ldf.data_type[c] == "quantitative"]
+    combinations = {f'{posbl_attrs[i1]}_x_{posbl_attrs[i2]}' : (posbl_attrs[i1], posbl_attrs[i2]) 
+                    for i1 in range(len(posbl_attrs)) 
+                    for i2 in range(i1, len(posbl_attrs))}
+    
+    vlist = [Vis('', ldf.data[v[0]] * ldf.data[v[1]], k) for k, v in combinations.items()]
 
     # vlist = lux.vis.VisList.VisList(combinations, source=ldf)
-    vlist=ldf.current_vis
-
-
-
+    # vlist=ldf.current_vis
 
     recommendation["collection"] = vlist
     return recommendation

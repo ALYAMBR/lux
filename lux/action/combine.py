@@ -14,6 +14,7 @@
 
 import lux
 from lux.vis.Vis import Vis
+from lux.vis.VisList import VisList
 
 
 def combine(ldf):
@@ -43,13 +44,17 @@ def combine(ldf):
     }
 
     posbl_attrs = [c for c in ldf.columns if ldf.data_type[c] == "quantitative"]
-    combinations = {f'{posbl_attrs[i1]}_x_{posbl_attrs[i2]}' : (posbl_attrs[i1], posbl_attrs[i2]) 
-                    for i1 in range(len(posbl_attrs)) 
-                    for i2 in range(i1, len(posbl_attrs))}
+    combinations = {f'{posbl_attrs[i1]}_x_{ldf.intent[i2].attribute}' : (posbl_attrs[i1], ldf.intent[i2].attribute) 
+                    for i1 in range(len(posbl_attrs))
+                    for i2 in range(len(ldf.intent))}
     
-    vlist = [Vis('', ldf.data[v[0]] * ldf.data[v[1]], k) for k, v in combinations.items()]
+    for k, v in combinations.items():
+        ldf[k] = ldf[v[0]] * ldf[v[1]]
 
-    # vlist = lux.vis.VisList.VisList(combinations, source=ldf)
+    combinations_names = [k for k in combinations.keys()]
+
+    vlist = VisList([lux.Clause('?')], source=ldf)
+    vlist = vlist.showK()
     # vlist=ldf.current_vis
 
     recommendation["collection"] = vlist
